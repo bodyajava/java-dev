@@ -100,5 +100,4 @@ public class TestBase {
 	      acceptNextAlert = true;
 	    }
 	  }
-
 }
