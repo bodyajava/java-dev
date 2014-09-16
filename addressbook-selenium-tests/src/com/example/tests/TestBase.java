@@ -100,4 +100,37 @@ public class TestBase {
 	      acceptNextAlert = true;
 	    }
 	  }
+
+	protected void addNewContact() {
+		driver.findElement(By.linkText("add new")).click();
+	}
+
+	protected void fillContactForm(ContactData contact) {
+		driver.findElement(By.name("firstname")).clear();
+	    driver.findElement(By.name("firstname")).sendKeys(contact.contact_firstname);
+	    driver.findElement(By.name("lastname")).clear();
+	    driver.findElement(By.name("lastname")).sendKeys(contact.contact_lastname);
+	    driver.findElement(By.name("address")).clear();
+	    driver.findElement(By.name("address")).sendKeys(contact.contact_address);
+	    driver.findElement(By.name("home")).clear();
+	    driver.findElement(By.name("home")).sendKeys(contact.contact_phone_home);
+	    driver.findElement(By.name("mobile")).clear();
+	    driver.findElement(By.name("mobile")).sendKeys(contact.contact_phone_mobile);
+	    driver.findElement(By.name("email")).clear();
+	    driver.findElement(By.name("email")).sendKeys(contact.contact_email);
+	    //new Select(driver.findElement(By.name("bday"))).selectByVisibleText("18");
+	    //new Select(driver.findElement(By.name("bmonth"))).selectByVisibleText("December");
+	    driver.findElement(By.name("byear")).clear();
+	    driver.findElement(By.name("byear")).sendKeys(contact.contact_byyear);
+	    //new Select(driver.findElement(By.name("new_group"))).selectByVisibleText("New Congregation");
+	    driver.findElement(By.name("address2")).clear();
+	    driver.findElement(By.name("address2")).sendKeys(contact.contact_address2);
+	    driver.findElement(By.name("phone2")).clear();
+	    driver.findElement(By.name("phone2")).sendKeys(contact.contact_phone2);
+	}
+
+	protected void submitContactForm() {
+		driver.findElement(By.name("submit")).click();
+	}
+	
 }
