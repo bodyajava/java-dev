@@ -1,5 +1,4 @@
 package com.example.tests;
-
 //import org.junit.*;
 import org.testng.annotations.Test;
 
@@ -11,21 +10,23 @@ public class GroupCreationTests extends TestBase {
 	group.header = "Description of Congregation";
 	group.footer = "Full description of Congregation";
 
-	openMainPage();
-    gotoGroupsPage();
-    addNewGroup();
-    fillGroupForm(group);
-    submitGroupForm();
-    gobackToGroupPage();
+	app.getNavigationHelper().openMainPage();
+    app.getNavigationHelper().gotoGroupsPage();
+    app.getGroupHelper().addNewGroup();
+    app.getGroupHelper().fillGroupForm(group);
+    app.getGroupHelper().submitGroupForm();
+    //app.getGroupHelper().gobackToGroupPage();
+    app.getNavigationHelper().gotoGroupsPage();
   }
 
   @Test
   public void testAddEmptyGroupCreation() throws Exception {
-	openMainPage();
-    gotoGroupsPage();
-    addNewGroup();
-    fillGroupForm(new GroupData("", "", ""));
-    submitGroupForm();
-    gobackToGroupPage();
+	app.getNavigationHelper().openMainPage();
+    app.getNavigationHelper().gotoGroupsPage();
+    app.getGroupHelper().addNewGroup();
+    app.getGroupHelper().fillGroupForm(new GroupData("", "", ""));
+    app.getGroupHelper().submitGroupForm();
+    //app.getGroupHelper().gobackToGroupPage();
+    app.getNavigationHelper().gotoGroupsPage();
   }
 }
