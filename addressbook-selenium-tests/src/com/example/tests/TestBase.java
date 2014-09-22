@@ -6,7 +6,7 @@ import com.example.fw.ApplicationManager;
 //import org.testng.annotations.BeforeClass
 
 public class TestBase {
-	protected ApplicationManager app;
+	static ApplicationManager app;
 
 	@BeforeTest
 	public void setUp() throws Exception {

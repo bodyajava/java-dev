@@ -29,7 +29,7 @@ public class ContactCreationTests extends TestBase {
 
   @Test
   public void testAddEmptyContact() throws Exception {
-	ContactData contact = new ContactData("", "", "", "", "", "", "", "", "", "", "", "", "");
+	ContactData contact = new ContactData("", "", "", "", "", "", "", "", "-", "-", "", "", "");
     //contact.byday = "-";
     //contact.bymonth = "-";
 	app.getNavigationHelper().openMainPage();
