@@ -30,8 +30,31 @@ public class ContactHelper extends HelperBase{
 		type(By.name("phone2"), contact.phone2);
 	}
 
-	public void submitContactForm() {
+	public void submitNewContactForm() {
 		click(By.name("submit"));
+	}
+
+	public void selectContactByIndex(int index) {
+		index = index + 1;
+		click(By.xpath("//tr["+index+"]/td[1]/input"));
+	}
+	
+	public void clickEditContactByIndex(int index) {
+		index = index + 1;
+		click(By.xpath("//tr["+index+"]/td[7]/a/img"));
+	}
+
+	public void openContactForUpdate(int index) {
+		selectContactByIndex(index);		
+		clickEditContactByIndex(index);
+	}
+
+	public void deleteContact() {
+		click(By.xpath("//form[2]/input[2]"));
+	}
+
+	public void submitUpdatedContactForm() {
+		click(By.xpath("//form[1]/input[11]"));
 	}
 
 }

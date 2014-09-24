@@ -9,13 +9,11 @@ public class GroupCreationTests extends TestBase {
 	group.groupname = "New Congregation";
 	group.header = "Description of Congregation";
 	group.footer = "Full description of Congregation";
-
 	app.getNavigationHelper().openMainPage();
     app.getNavigationHelper().gotoGroupsPage();
     app.getGroupHelper().addNewGroup();
     app.getGroupHelper().fillGroupForm(group);
-    app.getGroupHelper().submitGroupForm();
-    //app.getGroupHelper().gobackToGroupPage();
+    app.getGroupHelper().submitNewGroupForm();
     app.getNavigationHelper().gotoGroupsPage();
   }
 
@@ -25,8 +23,7 @@ public class GroupCreationTests extends TestBase {
     app.getNavigationHelper().gotoGroupsPage();
     app.getGroupHelper().addNewGroup();
     app.getGroupHelper().fillGroupForm(new GroupData("", "", ""));
-    app.getGroupHelper().submitGroupForm();
-    //app.getGroupHelper().gobackToGroupPage();
+    app.getGroupHelper().submitNewGroupForm();
     app.getNavigationHelper().gotoGroupsPage();
   }
 }

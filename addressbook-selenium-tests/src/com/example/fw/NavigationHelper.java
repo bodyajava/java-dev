@@ -10,7 +10,7 @@ public class NavigationHelper extends HelperBase{
 
 	public void openMainPage() {
 		// open main storefront page
-	    driver.get(manager.baseUrl + "/addressbookv4.1.4/group.php");
+	    driver.get(manager.baseUrl + "/addressbookv4.1.4/");
 	}
 
 	public void gotoGroupsPage() {
