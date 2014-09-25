@@ -35,12 +35,12 @@ public class ContactHelper extends HelperBase{
 	}
 
 	public void selectContactByIndex(int index) {
-		index = index + 1;
+		index++; // = index + 1;
 		click(By.xpath("//tr["+index+"]/td[1]/input"));
 	}
 	
 	public void clickEditContactByIndex(int index) {
-		index = index + 1;
+		index++;
 		click(By.xpath("//tr["+index+"]/td[7]/a/img"));
 	}
 

@@ -17,8 +17,8 @@ public class ContactUpdateTests extends TestBase {
 	    contact.byyear = "1976";
 	    contact.address2 = "Pushkina 42, Chisinau, Moldova";
 	    contact.phone2 = "+373.022.25.7070";
-
-		app.getNavigationHelper().openMainPage();
+	    
+	    app.getNavigationHelper().openMainPage();
 		app.getContactHelper().openContactForUpdate(4);
 		app.getContactHelper().fillContactForm(contact);
 		app.getContactHelper().submitUpdatedContactForm();

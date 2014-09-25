@@ -6,7 +6,7 @@ public class GroupUpdateTests extends TestBase {
 	@Test
 	public void updateCertainGroup() throws Exception {
 	    GroupData group = new GroupData();
-		group.groupname = "Congregation in Spain";
+		group.name = "Congregation in Spain";
 		group.footer = "Full description about Spain";
 		app.getNavigationHelper().openMainPage();
 	    app.getNavigationHelper().gotoGroupsPage();
