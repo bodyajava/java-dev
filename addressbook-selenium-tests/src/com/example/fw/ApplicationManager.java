@@ -10,6 +10,7 @@ public class ApplicationManager {
 	private NavigationHelper navigationHelper;
 	private GroupHelper groupHelper;
 	private ContactHelper contactHelper;
+	private GenerateDataHelper generateDataHelper;
 	
 	public ApplicationManager () {
 	    driver = new FirefoxDriver();
@@ -44,4 +45,12 @@ public class ApplicationManager {
 		};
 		return contactHelper;
 	}
+
+	public Object getGenerateDataHelper() {
+		if (generateDataHelper == null) {
+			generateDataHelper = new GenerateDataHelper(this);
+		};
+		return generateDataHelper;
+	}
+	 
 }

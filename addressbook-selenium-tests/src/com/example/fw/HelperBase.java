@@ -1,5 +1,6 @@
 package com.example.fw;
 
+import java.util.Random;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
@@ -64,5 +65,12 @@ public abstract class HelperBase {
 			new Select(driver.findElement(locator)).selectByVisibleText(text);	
 		}
 	}
+	
+	public int generateIndexBasedOnListSize(int listSize) {
+		Random rnd = new Random();
+		int index = rnd.nextInt(listSize - 1);
+		return index;
+	}
+
 
 }
