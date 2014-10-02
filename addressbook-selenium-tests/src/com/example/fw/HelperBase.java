@@ -66,11 +66,17 @@ public abstract class HelperBase {
 		}
 	}
 	
+	public void selectDropDownItemByRandom(String locator) {
+		Select selectBox = new Select(driver.findElement(By.name(locator)));
+	    int selectOptions = selectBox.getOptions().size();
+	    Random rnd = new Random();
+	    selectBox.selectByIndex(rnd.nextInt(selectOptions - 1));
+	}
+
 	public int generateIndexBasedOnListSize(int listSize) {
 		Random rnd = new Random();
 		int index = rnd.nextInt(listSize - 1);
 		return index;
 	}
-
-
+	
 }

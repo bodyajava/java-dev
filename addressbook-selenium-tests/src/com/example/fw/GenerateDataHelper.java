@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
 import org.testng.annotations.DataProvider;
 
 import com.example.tests.ContactData;
@@ -45,8 +46,8 @@ public class GenerateDataHelper extends HelperBase{
 		    contact.phone_work = generateRandomString(Mode.PHONE, 15, 1);
 		    contact.email = generateRandomString(Mode.EMAIL, 25, 0);
 		    contact.email2 = generateRandomString(Mode.EMAIL, 25, 0);
-		    contact.byday = "7";
-		    contact.bymonth = "January";
+		    //contact.byday = selectDropDownItemByRandom("bday");
+		    // contact.bymonth = "January";
 		    contact.byyear = generateRandomString(Mode.NUMERIC, 4, 1);
 		    contact.address2 = generateRandomString(Mode.ALPHANUMERIC, 100, 0);
 		    contact.phone2 = generateRandomString(Mode.PHONE, 15, 1);
@@ -54,7 +55,7 @@ public class GenerateDataHelper extends HelperBase{
 		}
 		return list.iterator();
 	  }
-
+	    
 	public static String generateRandomString(Mode mode, int fieldSize, int fixed) {
 		
 		StringBuffer buffer = new StringBuffer();

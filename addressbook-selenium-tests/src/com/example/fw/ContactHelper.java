@@ -25,10 +25,11 @@ public class ContactHelper extends HelperBase{
 		type(By.name("work"), contact.phone_work);
 		type(By.name("email"), contact.email);
 		type(By.name("email2"), contact.email2);
-	    selectByText(By.name("bday"), contact.byday);
-	    selectByText(By.name("bmonth"), contact.bymonth);
+		selectDropDownItemByRandom("bday");
+		selectDropDownItemByRandom("bmonth");
+	    // selectByText(By.name("bday"), contact.byday);
 		type(By.name("byear"), contact.byyear);
-	    //selectByText(By.name("new_group"), "New Congregation");
+		selectDropDownItemByRandom("new_group");
 		type(By.name("address2"), contact.address2);
 		type(By.name("phone2"), contact.phone2);
 	}
