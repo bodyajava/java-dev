@@ -48,8 +48,7 @@ public class ContactHelper extends HelperBase{
 		click(By.xpath("//tr["+index+"]/td[7]/a/img"));
 	}
 
-	public void openContactForUpdate(int index) {
-		//selectContactByIndex(index);		
+	public void openContactForUpdate(int index) {		
 		clickEditContactByIndex(index);
 	}
 
@@ -63,13 +62,14 @@ public class ContactHelper extends HelperBase{
 
 	public List<ContactData> getContactsList() {
 		List<ContactData> contacts = new ArrayList<ContactData>();
-		List<WebElement> checkboxes = driver.findElements(By.name("selected[]"));
-		for (WebElement checkbox : checkboxes) {
+		List<WebElement> rows = driver.findElements(By.xpath(".//tr"));
+		int index = rows.size();
+		for (int i = 1; i < index - 1; i++) {
 			ContactData contact = new ContactData();
-			String name = checkbox.getAttribute("title");
-			contact.firstname = name.substring("Select (".length(), name.length() - ")".length());
-			contacts.add(contact);
-		} 
+			contact.firstname = rows.get(i).findElement(By.xpath(".//td[3]")).getText();
+			contact.lastname = rows.get(i).findElement(By.xpath(".//td[2]")).getText();
+			contacts.add(contact);			
+		}
 		return contacts;
 	}
 

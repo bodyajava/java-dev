@@ -24,7 +24,7 @@ public class ContactCreationTests extends TestBase {
 		List<ContactData> newList = app.getContactHelper().getContactsList(); 
     
 		assertEquals(newList.size(), oldList.size() + 1);
-		contact.firstname = contact.firstname + " " + contact.lastname; 
+		//contact.firstname = contact.firstname + " " + contact.lastname; 
 		oldList.add(contact);
 		Collections.sort(oldList);
 		Collections.sort(newList);
