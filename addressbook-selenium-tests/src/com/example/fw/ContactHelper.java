@@ -27,7 +27,7 @@ public class ContactHelper extends HelperBase{
 		type(By.name("email2"), contact.email2);
 		selectDropDownItemByRandom("bday");
 		selectDropDownItemByRandom("bmonth");
-	    // selectByText(By.name("bday"), contact.byday);
+	    // selectByIndex(By.name("bday"), contact.byday);
 		type(By.name("byear"), contact.byyear);
 		selectDropDownItemByRandom("new_group");
 		type(By.name("address2"), contact.address2);

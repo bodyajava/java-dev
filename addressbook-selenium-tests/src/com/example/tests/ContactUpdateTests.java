@@ -1,16 +1,13 @@
 package com.example.tests;
-import static org.testng.Assert.assertEquals;
 
+import static org.testng.Assert.assertEquals;
 import java.util.Collections;
 import java.util.List;
-
 import org.testng.annotations.Test;
-
-import com.example.fw.GenerateDataHelper;
 
 public class ContactUpdateTests extends TestBase {
 
-	@Test(dataProvider = "randomValidContactGenerator", dataProviderClass = GenerateDataHelper.class)
+	@Test(dataProvider = "randomValidContactGenerator")
 	public void updateCertainContact(ContactData contact) throws Exception {
 	    
 	    app.getNavigationHelper().openMainPage();

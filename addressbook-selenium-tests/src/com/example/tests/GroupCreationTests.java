@@ -4,11 +4,10 @@ import static org.testng.Assert.assertEquals;
 import java.util.Collections;
 import java.util.List;
 import org.testng.annotations.Test;
-import com.example.fw.GenerateDataHelper;
 
 public class GroupCreationTests extends TestBase {
 	
-	@Test(dataProvider = "randomValidGroupGenerator", dataProviderClass = GenerateDataHelper.class)
+	@Test(dataProvider = "randomValidGroupGenerator")
 	public void testAddGroupWithValidData(GroupData group) throws Exception {  
 		app.getNavigationHelper().openMainPage();
 		app.getNavigationHelper().gotoGroupsPage();

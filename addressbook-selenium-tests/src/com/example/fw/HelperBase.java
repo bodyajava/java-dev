@@ -65,7 +65,7 @@ public abstract class HelperBase {
 			new Select(driver.findElement(locator)).selectByVisibleText(text);	
 		}
 	}
-	
+		
 	public void selectDropDownItemByRandom(String locator) {
 		Select selectBox = new Select(driver.findElement(By.name(locator)));
 	    int selectOptions = selectBox.getOptions().size();
@@ -78,5 +78,5 @@ public abstract class HelperBase {
 		int index = rnd.nextInt(listSize - 1);
 		return index;
 	}
-	
+
 }
