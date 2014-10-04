@@ -29,7 +29,7 @@ public class ContactHelper extends HelperBase{
 		selectDropDownItemByRandom("bmonth");
 	    // selectByIndex(By.name("bday"), contact.byday);
 		type(By.name("byear"), contact.byyear);
-		selectDropDownItemByRandom("new_group");
+		// selectDropDownItemByRandom("new_group");
 		type(By.name("address2"), contact.address2);
 		type(By.name("phone2"), contact.phone2);
 	}
@@ -71,6 +71,16 @@ public class ContactHelper extends HelperBase{
 			contacts.add(contact);			
 		}
 		return contacts;
+	}
+
+	public void deleteAllContacts() {
+		List<WebElement> rows = driver.findElements(By.xpath(".//tr"));
+		int index = rows.size();
+		for (int i = 1; i < index - 1; i++) {
+			openContactForUpdate(0);
+			deleteContact();
+			click(By.linkText("home"));
+		}
 	}
 
 }

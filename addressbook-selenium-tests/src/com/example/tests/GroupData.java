@@ -50,4 +50,9 @@ public class GroupData implements Comparable<GroupData>{
 		return this.name.toLowerCase().compareTo(other.name.toLowerCase());
 	}
 	
+	public GroupData withName(String name) {
+		this.name = name;
+		return this;
+	}
+
 }

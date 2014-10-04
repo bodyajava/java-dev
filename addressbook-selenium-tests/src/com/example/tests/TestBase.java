@@ -9,7 +9,6 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import com.example.fw.ApplicationManager;
 
-
 public class TestBase {
 	static ApplicationManager app;
 	
@@ -32,9 +31,9 @@ public class TestBase {
 		List<Object[]> list = new ArrayList<Object[]>();
 		for (int i = 0; i < 5; i++) {
 			GroupData group = new GroupData();
-			group.name = generateRandomString(Mode.ALPHANUMERIC, 15, 0);
-			group.header = generateRandomString(Mode.ALPHANUMERIC, 25, 0);
-			group.footer = generateRandomString(Mode.ALPHANUMERIC, 25, 0);
+				.withName(generateRandomString(Mode.ALPHANUMERIC, 15, 0))
+				.withHeader(generateRandomString(Mode.ALPHANUMERIC, 25, 0))
+				.withFooter(generateRandomString(Mode.ALPHANUMERIC, 25, 0));
 			list.add(new Object[]{group});
 		}
 		return list.iterator();
