@@ -30,12 +30,13 @@ public class TestBase {
 	public static Iterator<Object[]> randomValidGroupGenerator() {
 		List<Object[]> list = new ArrayList<Object[]>();
 		for (int i = 0; i < 5; i++) {
-			GroupData group = new GroupData();
+			GroupData group = new GroupData()
 				.withName(generateRandomString(Mode.ALPHANUMERIC, 15, 0))
 				.withHeader(generateRandomString(Mode.ALPHANUMERIC, 25, 0))
 				.withFooter(generateRandomString(Mode.ALPHANUMERIC, 25, 0));
 			list.add(new Object[]{group});
 		}
+		app.navigateTo().groupsPage();
 		return list.iterator();
 	  }
 
@@ -43,22 +44,23 @@ public class TestBase {
 	public static Iterator<Object[]> randomValidContactGenerator() {
 		List<Object[]> list = new ArrayList<Object[]>();
 		for (int i = 0; i < 5; i++) {
-			ContactData contact = new ContactData();
-			contact.firstname = generateRandomString(Mode.ALPHA, 50, 0);
-			contact.lastname = generateRandomString(Mode.ALPHA, 50, 0);
-		    contact.address = generateRandomString(Mode.ALPHANUMERIC, 100, 0);
-		    contact.phone_home = generateRandomString(Mode.PHONE, 15, 1); 
-		    contact.phone_mobile = generateRandomString(Mode.PHONE, 15, 1);
-		    contact.phone_work = generateRandomString(Mode.PHONE, 15, 1);
-		    contact.email = generateRandomString(Mode.EMAIL, 25, 0);
-		    contact.email2 = generateRandomString(Mode.EMAIL, 25, 0);
-		    contact.byday = "" + generateWithin(32);
-		    contact.bymonth = "" + generateWithin(13);
-		    contact.byyear = generateRandomString(Mode.NUMERIC, 4, 1);
-		    contact.address2 = generateRandomString(Mode.ALPHANUMERIC, 100, 0);
-		    contact.phone2 = generateRandomString(Mode.PHONE, 15, 1);
+			ContactData contact = new ContactData()
+				.withFirstname(generateRandomString(Mode.ALPHA, 50, 0))
+				.withLastname(generateRandomString(Mode.ALPHA, 50, 0))
+				.withAddress(generateRandomString(Mode.ALPHANUMERIC, 100, 0))
+				.withPhoneHome(generateRandomString(Mode.PHONE, 15, 1))
+				.withPhoneMobile(generateRandomString(Mode.PHONE, 15, 1))
+				.withPhoneWork(generateRandomString(Mode.PHONE, 15, 1))
+				.withEmail(generateRandomString(Mode.EMAIL, 25, 0))
+				.withEmail2(generateRandomString(Mode.EMAIL, 25, 0))
+				.withDayOfBirth("" + generateWithin(32))
+				.withMonthOfBirth("" + generateWithin(13))
+				.withYearOfBirth(generateRandomString(Mode.NUMERIC, 4, 1))
+				.withAddress2(generateRandomString(Mode.ALPHANUMERIC, 100, 0))
+				.withPhone2(generateRandomString(Mode.PHONE, 15, 1));
 			list.add(new Object[]{contact});
 		}
+		app.navigateTo().mainPage();
 		return list.iterator();
 	  }
 	    
@@ -95,7 +97,7 @@ public class TestBase {
 			length = rnd.nextInt(fieldSize);
 		}
 		
-		if (rnd.nextInt(3) == 0) {
+		if (rnd.nextInt(9) == 0) {
 			return "";	
 		} else {
 			for (int i = 0; i < length; i++) {

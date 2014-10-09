@@ -1,6 +1,7 @@
 package com.example.fw;
 
 import java.util.Random;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
@@ -18,6 +19,7 @@ public abstract class HelperBase {
 		this.manager = manager;
 		this.driver = manager.driver;
 	}
+	
 	public boolean isElementPresent(By by) {
 	    try {
 	      driver.findElement(by);
@@ -75,7 +77,7 @@ public abstract class HelperBase {
 
 	public int generateIndexBasedOnListSize(int listSize) {
 		Random rnd = new Random();
-		int index = rnd.nextInt(listSize - 1);
+		int index = rnd.nextInt(listSize);
 		return index;
 	}
 
