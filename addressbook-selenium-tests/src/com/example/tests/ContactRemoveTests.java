@@ -1,6 +1,7 @@
 package com.example.tests;
 
-import static org.testng.Assert.assertEquals;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertThat;
 import org.testng.annotations.Test;
 import com.example.utils.SortedListOf;
 
@@ -16,10 +17,7 @@ public class ContactRemoveTests extends TestBase {
 
 		SortedListOf<ContactData> newList = app.getContactHelper().getContactsList(); 
 
-		oldList.remove(index);
-	    assertEquals(newList.size(), oldList.size());
-	    assertEquals(newList, oldList);
-
+		assertThat(newList, equalTo(oldList.without(index)));
 	}
 
 }
