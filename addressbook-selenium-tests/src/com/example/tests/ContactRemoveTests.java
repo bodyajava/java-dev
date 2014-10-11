@@ -13,11 +13,12 @@ public class ContactRemoveTests extends TestBase {
 		SortedListOf<ContactData> oldList = app.getContactHelper().getContactsList();
 
 		int index = app.getContactHelper().generateIndexBasedOnListSize(oldList.size());
-		app.getContactHelper().deleteContact(index);
+		ContactData candidate = app.getContactHelper().deleteContact(index);
+		int candidateIndex = app.getContactHelper().getIndexByName(oldList, candidate);
 
-		SortedListOf<ContactData> newList = app.getContactHelper().getContactsList(); 
+		SortedListOf<ContactData> newList = app.getContactHelper().getContactsList();
 
-		assertThat(newList, equalTo(oldList.without(index)));
+		assertThat(newList, equalTo(oldList.without(candidateIndex)));
 	}
 
 }

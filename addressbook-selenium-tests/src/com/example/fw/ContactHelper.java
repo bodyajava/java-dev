@@ -7,12 +7,13 @@ import com.example.tests.ContactData;
 import com.example.utils.SortedListOf;
 
 public class ContactHelper extends HelperBase{
-
+	
 	public ContactHelper(ApplicationManager manager) {
 		super(manager);
 	}
 
 	private SortedListOf<ContactData> cachedContacts;
+	private ContactData candidate;
 	
 	public SortedListOf<ContactData> getContactsList() {
 		if (cachedContacts == null) {
@@ -42,19 +43,23 @@ public class ContactHelper extends HelperBase{
 		rebuildCache();
 	}
 
-	public void updateContact(ContactData contact, int index) {
+	public ContactData updateContact(ContactData contact, int index) {
 		openContactForUpdate(index);
+		getCandidate();
 		fillContactForm(contact);
 		clickUpdateButton();
 		returnToHomePage();
 		rebuildCache();
+		return candidate;
 	}
 
-	public void deleteContact(int index) {
+	public ContactData deleteContact(int index) {
 		openContactForUpdate(index);
+		getCandidate();		
 		clickDeleteButton();
 		returnToHomePage();
 		rebuildCache();
+		return candidate;
 	}
 
 	public ContactHelper openContactForUpdate(int index) {		
@@ -65,6 +70,12 @@ public class ContactHelper extends HelperBase{
 	
 	// LOW LEVEL METHODS =================================================================================
 	
+	private void getCandidate() {
+		candidate = new ContactData()
+			.withFirstname(driver.findElement(By.xpath("//input[2]")).getAttribute("value"))
+			.withLastname(driver.findElement(By.xpath("//input[3]")).getAttribute("value"));		
+	}
+
 	public ContactHelper addNewContact() {
 		click(By.linkText("add new"));
 		return this;
@@ -131,6 +142,19 @@ public class ContactHelper extends HelperBase{
 			clickDeleteButton();
 			returnToHomePage();
 		}
+	}
+
+	public int getIndexByName(SortedListOf<ContactData> oldList,
+			ContactData candidate) {
+		for (int i = 0; i < oldList.size(); i++) {
+			ContactData contact = oldList.get(i);
+	        if (contact.getFirstname().equals(candidate.getFirstname())
+	        		&& contact.getLastname().equals(candidate.getLastname()))
+	        {
+	            return i;
+	        }
+	    } 
+		return -1;
 	}
 
 }
