@@ -1,11 +1,16 @@
 package com.example.fw;
 
 import org.openqa.selenium.By;
+import com.example.fw.ApplicationManager;
 
 public class NavigationHelper extends HelperBase{
 
 	public NavigationHelper(ApplicationManager manager) {
 		super(manager);
+	}
+
+	public void storefront() {
+		manager.driver.get(manager.baseUrl + "addressbookv4.1.4/");
 	}
 
 	public void mainPage() {
@@ -17,6 +22,12 @@ public class NavigationHelper extends HelperBase{
 	public void groupsPage() {
 		//if (! onGroupsPage()) {
 			click(By.linkText("groups"));
+		//}
+	}
+
+	public void printPhonesPage() {
+		//if (! onGroupsPage()) {
+			click(By.linkText("print phones"));
 		//}
 	}
 

@@ -157,4 +157,22 @@ public class ContactHelper extends HelperBase{
 		return -1;
 	}
 
+	public SortedListOf<ContactData> getContactsWithPhonesList() {
+		SortedListOf<ContactData> contactsWithPhones = new SortedListOf<ContactData>();
+		List<WebElement> rows = driver.findElements(By.xpath(".//tr"));
+		int index = rows.size();
+		for (int i = 1; i < index - 1; i++) {
+			String firstname = rows.get(i).findElement(By.xpath(".//td[3]")).getText();
+			String lastname = rows.get(i).findElement(By.xpath(".//td[2]")).getText();
+			//String phone_home = rows.get(i).findElement(By.xpath(".//td[5]")).getText();
+			firstname = firstname + " " + lastname;
+			lastname = firstname;
+			contactsWithPhones.add(new ContactData()
+				.withFirstname(firstname)
+				.withLastname(lastname));
+				//.withPhoneHome(phone_home));			
+		}
+		return contactsWithPhones;
+	}
+
 }
