@@ -1,12 +1,10 @@
 package com.example.tests;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
 import com.example.fw.ApplicationManager;
 
 public class TestBase {
@@ -16,54 +14,35 @@ public class TestBase {
 	    ALPHA, ALPHANUMERIC, NUMERIC, PHONE, EMAIL 
 	}
 
+	
 	@BeforeTest
 	public void setUp() throws Exception {
 		app = new ApplicationManager (); 
 	  }
 
+	
 	@AfterTest
 	public void tearDown() throws Exception {
 		app.stop();
 	  }
 		
-	@DataProvider
-	public static Iterator<Object[]> randomValidGroupGenerator() {
+	
+	public static List<Object[]> wrapGroupsIntoObjects(List<GroupData> groups) {
 		List<Object[]> list = new ArrayList<Object[]>();
-		for (int i = 0; i < 5; i++) {
-			GroupData group = new GroupData()
-				.withName(generateRandomString(Mode.ALPHANUMERIC, 15, 0))
-				.withHeader(generateRandomString(Mode.ALPHANUMERIC, 25, 0))
-				.withFooter(generateRandomString(Mode.ALPHANUMERIC, 25, 0));
+		for (GroupData group : groups) {
 			list.add(new Object[]{group});
 		}
-		app.navigateTo().groupsPage();
-		return list.iterator();
-	  }
-
-	@DataProvider
-	public static Iterator<Object[]> randomValidContactGenerator() {
+		return list;
+	}
+	    
+	public static List<Object[]> wrapContactsIntoObjects(List<ContactData> contacts) {
 		List<Object[]> list = new ArrayList<Object[]>();
-		for (int i = 0; i < 5; i++) {
-			ContactData contact = new ContactData()
-				.withFirstname(generateRandomString(Mode.ALPHA, 50, 0))
-				.withLastname(generateRandomString(Mode.ALPHA, 50, 0))
-				.withAddress(generateRandomString(Mode.ALPHANUMERIC, 100, 0))
-				.withPhoneHome(generateRandomString(Mode.PHONE, 15, 1))
-				.withPhoneMobile(generateRandomString(Mode.PHONE, 15, 1))
-				.withPhoneWork(generateRandomString(Mode.PHONE, 15, 1))
-				.withEmail(generateRandomString(Mode.EMAIL, 25, 0))
-				.withEmail2(generateRandomString(Mode.EMAIL, 25, 0))
-				.withDayOfBirth("" + generateWithin(32))
-				.withMonthOfBirth("" + generateWithin(13))
-				.withYearOfBirth(generateRandomString(Mode.NUMERIC, 4, 1))
-				.withAddress2(generateRandomString(Mode.ALPHANUMERIC, 100, 0))
-				.withPhone2(generateRandomString(Mode.PHONE, 15, 1));
+		for (ContactData contact : contacts) {
 			list.add(new Object[]{contact});
 		}
-		app.navigateTo().mainPage();
-		return list.iterator();
-	  }
-	    
+		return list;
+	}
+
 	public static String generateRandomString(Mode mode, int fieldSize, int fixed) {
 		
 		StringBuffer buffer = new StringBuffer();
@@ -109,10 +88,4 @@ public class TestBase {
 		}
 	}
 	
-	public static int generateWithin(int number) {
-		Random rnd = new Random();
-		int index = rnd.nextInt(number);
-		return index;
-	}
-
 }

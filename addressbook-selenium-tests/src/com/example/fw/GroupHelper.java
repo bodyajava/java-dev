@@ -23,12 +23,15 @@ public class GroupHelper extends HelperBase{
 
 	private void rebuildCache() {
 		cachedGroups = new SortedListOf<GroupData>();
-		List<WebElement> checkboxes = driver.findElements(By.name("selected[]"));
-		for (WebElement checkbox : checkboxes) {
-			String title = checkbox.getAttribute("title");
-			String name = title.substring("Select (".length(), title.length() - ")".length());
-			cachedGroups.add(new GroupData().withName(name));
-		} 
+		List<WebElement> records = driver.findElements(By.xpath("//input"));
+		if (records.size() > 3) {
+			List<WebElement> checkboxes = driver.findElements(By.name("selected[]"));
+			for (WebElement checkbox : checkboxes) {
+				String title = checkbox.getAttribute("title");
+				String name = title.substring("Select (".length(), title.length() - ")".length());
+				cachedGroups.add(new GroupData().withName(name));
+			}
+		}
 	}
 
 	public void createGroup(GroupData group) {

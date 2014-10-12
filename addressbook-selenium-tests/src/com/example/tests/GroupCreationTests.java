@@ -1,13 +1,22 @@
 package com.example.tests;
 
+import static com.example.tests.GroupDataGenerator.loadGroupsFromCsvFile;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
+import java.util.Iterator;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import com.example.utils.SortedListOf;
 
 public class GroupCreationTests extends TestBase {
 	
-	@Test(dataProvider = "randomValidGroupGenerator")
+	@DataProvider
+	public static Iterator<Object[]> loadGroupsFromFile() {
+		app.navigateTo().groupsPage();
+		return wrapGroupsIntoObjects(loadGroupsFromCsvFile(5)).iterator();
+	  }
+
+	@Test(dataProvider = "loadGroupsFromFile")
 	public void testAddGroupWithValidData(GroupData group) throws Exception { 
 		
 		SortedListOf<GroupData> oldList = app.getGroupHelper().getGroupsList();

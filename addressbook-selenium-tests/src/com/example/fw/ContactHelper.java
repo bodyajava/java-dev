@@ -26,12 +26,14 @@ public class ContactHelper extends HelperBase{
 		cachedContacts = new SortedListOf<ContactData>();
 		List<WebElement> rows = driver.findElements(By.xpath(".//tr"));
 		int index = rows.size();
-		for (int i = 1; i < index - 1; i++) {
-			String firstname = rows.get(i).findElement(By.xpath(".//td[3]")).getText();
-			String lastname = rows.get(i).findElement(By.xpath(".//td[2]")).getText();
-			cachedContacts.add(new ContactData()
-				.withFirstname(firstname)
-				.withLastname(lastname));			
+		if (index > 2) {
+			for (int i = 1; i < index - 1; i++) {
+				String firstname = rows.get(i).findElement(By.xpath(".//td[3]")).getText();
+				String lastname = rows.get(i).findElement(By.xpath(".//td[2]")).getText();
+				cachedContacts.add(new ContactData()
+					.withFirstname(firstname)
+					.withLastname(lastname));
+			}
 		}
 	}
 
