@@ -1,12 +1,16 @@
 package com.example.tests;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import com.example.tests.TestBase.Mode;
+import com.thoughtworks.xstream.XStream;
+
 import static com.example.tests.TestBase.generateRandomString;
 
 public class ContactDataGenerator {
@@ -70,11 +74,6 @@ public class ContactDataGenerator {
 		return index;
 	}
 
-	private static void saveContactsToXmlFile(List<ContactData> contacts, File file) throws IOException {
-		// TODO Auto-generated method stub
-		
-	}
-
 	private static void saveContactsToCsvFile(List<ContactData> contacts, File file) throws IOException {
 		FileWriter writer = new FileWriter(file);
 		for (ContactData contact : contacts) {
@@ -90,10 +89,50 @@ public class ContactDataGenerator {
 					+ contact.getBymonth() + ","
 					+ contact.getByyear() + ","
 					+ contact.getAddress2() + ","
-					+ contact.getPhone2() + "\n");
+					+ contact.getPhone2() + ",!" + "\n");
 		}
 		writer.close();
 	}
 	
+	public static List<ContactData> loadContactsFromCsvFile(File file) throws IOException {
+		List<ContactData> list = new ArrayList<ContactData>();
+		FileReader reader = new FileReader(file);
+		BufferedReader bufferedReader = new BufferedReader(reader);
+		String line = bufferedReader.readLine();
+		while (line != null) {
+			String[] part = line.split(",");
+			ContactData contact = new ContactData()
+				.withFirstname(part[0])
+				.withLastname(part[1])
+				.withAddress(part[2])
+				.withPhoneHome(part[3])
+				.withPhoneMobile(part[4])
+				.withPhoneWork(part[5])
+				.withEmail(part[6])
+				.withEmail2(part[7])
+				.withDayOfBirth(part[8])
+				.withMonthOfBirth(part[9])
+				.withYearOfBirth(part[10])
+				.withAddress2(part[11])
+				.withPhone2(part[12]);
+			list.add(contact);
+			line = bufferedReader.readLine();
+		}
+		
+		bufferedReader.close();
+		return list;
+	}
+
+	private static void saveContactsToXmlFile(List<ContactData> contacts, File file) throws IOException {
+		XStream xstream = new XStream();
+		String xml = xstream.toXML(contacts);
+		FileWriter writer = new FileWriter(file);
+		writer.write(xml);
+		writer.close();
+	}
+	
+	public static List<ContactData> loadContactsFromXmlFile(File file) throws IOException {
+		return null;
+	}
 
 }
