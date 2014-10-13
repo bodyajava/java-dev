@@ -125,6 +125,7 @@ public class ContactDataGenerator {
 
 	private static void saveContactsToXmlFile(List<ContactData> contacts, File file) throws IOException {
 		XStream xstream = new XStream();
+		xstream.alias("contact", ContactData.class);
 		String xml = xstream.toXML(contacts);
 		FileWriter writer = new FileWriter(file);
 		writer.write(xml);
@@ -132,7 +133,9 @@ public class ContactDataGenerator {
 	}
 	
 	public static List<ContactData> loadContactsFromXmlFile(File file) throws IOException {
-		return null;
+		XStream xstream = new XStream();
+		xstream.alias("contact", ContactData.class);
+		return (List<ContactData>) xstream.fromXML(file);
 	}
 
 }

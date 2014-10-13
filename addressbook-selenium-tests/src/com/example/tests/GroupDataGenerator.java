@@ -88,6 +88,7 @@ public class GroupDataGenerator {
 
 	private static void saveGroupsToXmlFile(List<GroupData> groups, File file) throws IOException {
 		XStream xstream = new XStream();
+		xstream.alias("group", GroupData.class);
 		String xml = xstream.toXML(groups);
 		FileWriter writer = new FileWriter(file);
 		writer.write(xml);
@@ -95,7 +96,9 @@ public class GroupDataGenerator {
 	}
 	
 	public static List<GroupData> loadGroupsFromXmlFile(File file) throws IOException {
-		return null;
+		XStream xstream = new XStream();
+		xstream.alias("group", GroupData.class);
+		return (List<GroupData>) xstream.fromXML(file);
 	}
 
 }
