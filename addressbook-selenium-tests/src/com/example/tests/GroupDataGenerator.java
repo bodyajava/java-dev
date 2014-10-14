@@ -36,8 +36,16 @@ public class GroupDataGenerator {
 			List<GroupData> groups = generateRandomGroups(amount);
 			if (format.equals("csv")) {
 				saveGroupsToCsvFile(groups, file);
+				System.out.println("Data generation done: "
+						+ "amount '" + amount + "', "
+						+ "file '" + file + "', "
+						+ "file format '" + format + "'."); 
 			} else if (format.equals("xml")) {
 				saveGroupsToXmlFile(groups, file);
+				System.out.println("Data generation done: "
+						+ "amount '" + amount + "', "
+						+ "file '" + file + "', "
+						+ "file format '" + format + "'."); 
 			} else {
 				System.out.println("Unknown file format rovided: " + format);
 				return;

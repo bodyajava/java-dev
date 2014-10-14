@@ -37,8 +37,16 @@ public class ContactDataGenerator {
 			List<ContactData> contacts = generateRandomContacts(amount);
 			if (format.equals("csv")) {
 				saveContactsToCsvFile(contacts, file);
+				System.out.println("Data generation done: "
+						+ "amount '" + amount + "', "
+						+ "file '" + file + "', "
+						+ "file format '" + format + "'.");
 			} else if (format.equals("xml")) {
 				saveContactsToXmlFile(contacts, file);
+				System.out.println("Data generation done: "
+						+ "amount '" + amount + "', "
+						+ "file '" + file + "', "
+						+ "file format '" + format + "'.");
 			} else {
 				System.out.println("Unknown file format rovided: " + format);
 				return;

@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 public class GroupDeleteAllGroups extends TestBase{
 
-	//@Test
+	@Test
 	public void deleteAllGroups() {
 		app.getGroupHelper().deleteAllGroups();
 	}
