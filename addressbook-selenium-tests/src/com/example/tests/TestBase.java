@@ -1,7 +1,10 @@
 package com.example.tests;
 
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -17,7 +20,10 @@ public class TestBase {
 	
 	@BeforeTest
 	public void setUp() throws Exception {
-		app = new ApplicationManager (); 
+		String configFile = System.getProperty("configFile", "application.ppp");
+		Properties properties = new Properties();
+		properties.load(new FileReader(new File(configFile)));
+		app = new ApplicationManager (properties); 
 	  }
 
 	
