@@ -92,9 +92,10 @@ public class ContactHelper extends HelperBase{
 		type(By.name("work"), contact.getPhone_work());
 		type(By.name("email"), contact.getEmail());
 		type(By.name("email2"), contact.getEmail2());
-		selectDropDownItemByRandom("bday");
-		selectDropDownItemByRandom("bmonth");
-	    // selectByIndex(By.name("bday"), contact.byday);
+		//selectDropDownItemByRandom("bday");
+		//selectDropDownItemByRandom("bmonth");
+	    selectByIndex(By.name("bday"), contact.getByday());
+	    selectByIndex(By.name("bmonth"), contact.getBymonth());
 		type(By.name("byear"), contact.getByyear());
 		// selectDropDownItemByRandom("new_group");
 		type(By.name("address2"), contact.getAddress2());

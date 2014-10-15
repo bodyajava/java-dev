@@ -67,7 +67,12 @@ public abstract class HelperBase {
 			new Select(driver.findElement(locator)).selectByVisibleText(text);	
 		}
 	}
-		
+
+	protected void selectByIndex(By locator, String byday) {
+		int index = Integer.parseInt(byday);
+		new Select(driver.findElement(locator)).selectByIndex(index);
+	}
+
 	public void selectDropDownItemByRandom(String locator) {
 		Select selectBox = new Select(driver.findElement(By.name(locator)));
 	    int selectOptions = selectBox.getOptions().size();

@@ -1,17 +1,19 @@
 package com.example.tests;
 
+import static com.example.tests.TestBase.generateRandomString;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
+
 import com.example.tests.TestBase.Mode;
 import com.thoughtworks.xstream.XStream;
-
-import static com.example.tests.TestBase.generateRandomString;
 
 public class ContactDataGenerator {
 
@@ -57,6 +59,8 @@ public class ContactDataGenerator {
 	public static List<ContactData> generateRandomContacts(int amount) {
 		List<ContactData> list = new ArrayList<ContactData>();
 		for (int i = 0; i < amount; i++) {
+	 
+			String[] date = generateRandomDate();		
 			ContactData contact = new ContactData()
 				.withFirstname(generateRandomString(Mode.ALPHA, 50, 0))
 				.withLastname(generateRandomString(Mode.ALPHA, 50, 0))
@@ -66,9 +70,9 @@ public class ContactDataGenerator {
 				.withPhoneWork(generateRandomString(Mode.PHONE, 15, 1))
 				.withEmail(generateRandomString(Mode.EMAIL, 25, 0))
 				.withEmail2(generateRandomString(Mode.EMAIL, 25, 0))
-				.withDayOfBirth("" + generateWithin(32))
-				.withMonthOfBirth("" + generateWithin(13))
-				.withYearOfBirth(generateRandomString(Mode.NUMERIC, 4, 1))
+				.withDayOfBirth(date[2])
+				.withMonthOfBirth(date[1])
+				.withYearOfBirth(date[5])
 				.withAddress2(generateRandomString(Mode.ALPHANUMERIC, 100, 0))
 				.withPhone2(generateRandomString(Mode.PHONE, 15, 1));
 			list.add(contact);
@@ -76,6 +80,27 @@ public class ContactDataGenerator {
 		return list;
 	}
 	
+	private static String[] generateRandomDate() {
+		Calendar calendar = Calendar.getInstance();
+	        calendar.set(Calendar.YEAR, randBetween(1900, 2010));
+	        calendar.set(Calendar.DAY_OF_YEAR, randBetween(1, 365));
+	        String randomDate = calendar.getTime().toString();
+	        String[] part = randomDate.split(" ");
+	        part[1] = ""+calendar.get(Calendar.MONTH);
+	        //String day = part[2];
+	        //String monthstr = part[1];
+	        //String year = part[5];
+	        //int month = calendar.get(Calendar.MONTH);
+	        
+	        //System.out.println(month +"," + monthstr +"-"+day+"-"+year); 
+		
+		return part;
+	}
+
+	private static int randBetween(int start, int end) {
+		return start + (int)Math.round(Math.random() * (end - start));
+	}
+
 	private static int generateWithin(int number) {
 		Random rnd = new Random();
 		int index = rnd.nextInt(number);
