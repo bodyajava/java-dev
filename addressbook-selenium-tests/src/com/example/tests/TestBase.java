@@ -20,7 +20,7 @@ public class TestBase {
 	
 	@BeforeTest
 	public void setUp() throws Exception {
-		String configFile = System.getProperty("configFile", "application.ppp");
+		String configFile = System.getProperty("configFile", "firefox.ppp");
 		Properties properties = new Properties();
 		properties.load(new FileReader(new File(configFile)));
 		app = new ApplicationManager (properties); 

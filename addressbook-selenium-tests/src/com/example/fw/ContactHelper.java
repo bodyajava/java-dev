@@ -3,6 +3,8 @@ package com.example.fw;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+
 import com.example.tests.ContactData;
 import com.example.utils.SortedListOf;
 
@@ -164,18 +166,63 @@ public class ContactHelper extends HelperBase{
 		SortedListOf<ContactData> contactsWithPhones = new SortedListOf<ContactData>();
 		List<WebElement> rows = driver.findElements(By.xpath(".//tr"));
 		int index = rows.size();
-		for (int i = 1; i < index - 1; i++) {
-			String firstname = rows.get(i).findElement(By.xpath(".//td[3]")).getText();
-			String lastname = rows.get(i).findElement(By.xpath(".//td[2]")).getText();
-			//String phone_home = rows.get(i).findElement(By.xpath(".//td[5]")).getText();
-			firstname = firstname + " " + lastname;
-			lastname = firstname;
+		for (int i = 0; i < index - 2; i++) {
+			openContactForUpdate(i);
+			String firstname = getValue(By.name("firstname"));
+			String lastname = getValue(By.name("lastname"));
+			String phone_home = getValue(By.name("home"));
+			String phone_mobile = getValue(By.name("mobile"));
+			String phone_work = getValue(By.name("work"));
+			String byday = getSelectedValue(By.name("bday"));
+			String bymonth = getSelectedValue(By.name("bmonth"));
+			String byyear = getValue(By.name("byear"));
+			String phone2 = getValue(By.name("phone2"));
+			String record = null;
+			
+			if ((firstname.isEmpty()) && (lastname.isEmpty())) {
+				record = ":";
+			} else if (firstname.isEmpty()) {
+				record = lastname + ":";
+			} else {
+				record = firstname + " " + lastname + ":";
+			}
+			
+			if (! phone_home.isEmpty()) {
+				record = record + "\n" + "H: " + phone_home; 
+			}
+			
+			if (! phone_mobile.isEmpty()) {
+				record = record + "\n" + "M: " + phone_mobile; 
+			}
+			
+			if (! phone_work.isEmpty()) {
+				record = record + "\n" + "W: " + phone_work; 
+			}
+			
+			if (! byyear.isEmpty()) {
+				record = record + "\n" + "Birthday: " + byday + ". "
+						+ bymonth + " " + byyear; 
+			}
+			
+			if (!phone2.isEmpty()) {
+				record = record + "\n" + "P: " + phone2; 
+			}
+			
 			contactsWithPhones.add(new ContactData()
-				.withFirstname(firstname)
-				.withLastname(lastname));
-				//.withPhoneHome(phone_home));			
+				.withFirstname(record));
+			
+			manager.navigateTo().mainPage();
 		}
 		return contactsWithPhones;
+	}
+
+	private String getSelectedValue(By locator) {
+		String selected = new Select(driver.findElement(locator)).getFirstSelectedOption().getText();
+		return selected;
+	}
+
+	private String getValue(By locator) {
+		return driver.findElement(locator).getAttribute("value");
 	}
 
 }
