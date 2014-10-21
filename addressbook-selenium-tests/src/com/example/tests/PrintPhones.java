@@ -10,9 +10,9 @@ public class PrintPhones extends TestBase {
 	@Test
 	public void testPrintPhones() throws Exception {
 
-		SortedListOf<ContactData> contactsList = app.getContactHelper().getContactsWithPhonesList();
+		SortedListOf<String> contactsList = app.getContactHelper().getContactsWithPhonesList();
 		
-		SortedListOf<ContactData> printedList = app.getPrintPhonesHelper().getPrintedList();
+		SortedListOf<String> printedList = app.getPrintPhonesHelper().getPrintedList();
 		
 		assertThat(printedList, equalTo(contactsList));
   }

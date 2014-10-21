@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
-import com.example.tests.ContactData;
 import com.example.utils.SortedListOf;
 
 public class PrintPhonesHelper extends HelperBase {
@@ -14,10 +12,10 @@ public class PrintPhonesHelper extends HelperBase {
 		super(manager);
 	}
 
-	public SortedListOf<ContactData> getPrintedList() {
+	public SortedListOf<String> getPrintedList() {
 		manager.navigateTo().printPhonesPage();
 		
-		SortedListOf<ContactData> printedContacts = new SortedListOf<ContactData>();
+		SortedListOf<String> printedContacts = new SortedListOf<String>();
 		List<WebElement> rows = driver.findElements(By.xpath(".//tr"));
 		int index = rows.size();
 		
@@ -25,8 +23,8 @@ public class PrintPhonesHelper extends HelperBase {
 			
 			for (int x = 1; x < 4; x++) {
 				String cell = driver.findElement(By.xpath("/html/body/div/div[1]/table/tbody/tr["+i+"]/td["+x+"]")).getText();
-				if (cell != ".") {					
-					printedContacts.add(new ContactData().withFirstname(cell));				
+				if (cell.contains(":")) {					
+					printedContacts.add(cell);				
 				}
 			}
 		}

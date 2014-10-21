@@ -162,8 +162,8 @@ public class ContactHelper extends HelperBase{
 		return -1;
 	}
 
-	public SortedListOf<ContactData> getContactsWithPhonesList() {
-		SortedListOf<ContactData> contactsWithPhones = new SortedListOf<ContactData>();
+	public SortedListOf<String> getContactsWithPhonesList() {
+		SortedListOf<String> contactsWithPhones = new SortedListOf<String>();
 		List<WebElement> rows = driver.findElements(By.xpath(".//tr"));
 		int index = rows.size();
 		for (int i = 0; i < index - 2; i++) {
@@ -208,8 +208,7 @@ public class ContactHelper extends HelperBase{
 				record = record + "\n" + "P: " + phone2; 
 			}
 			
-			contactsWithPhones.add(new ContactData()
-				.withFirstname(record));
+			contactsWithPhones.add(record);
 			
 			manager.navigateTo().mainPage();
 		}
