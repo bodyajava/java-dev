@@ -9,6 +9,7 @@ public class ApplicationManager {
 	private static ApplicationManager singletone; 
 	private Properties properties;
 	private FolderHelper folderHelper;
+	private MenuHelper menuHelper;
 	private JFrameOperator mainFrame;
 	
 	public static ApplicationManager getInstance() {
@@ -19,6 +20,7 @@ public class ApplicationManager {
 	}
 
 	public void stop() {
+		getApplication().requestClose();
 	}
 
 	public void setProperties(Properties properties) {
@@ -33,13 +35,6 @@ public class ApplicationManager {
 		return properties.getProperty(key, defaultValue);
 	}
 
-	public FolderHelper getFolderHelper() {
-		if (folderHelper == null) {
-			folderHelper = new FolderHelper(this);
-		}
-		return folderHelper;
-	}
-
 	public JFrameOperator getApplication() {
 		if (mainFrame == null) {
 			try {
@@ -50,6 +45,20 @@ public class ApplicationManager {
 			}
 		}
 		return mainFrame;
+	}
+
+	public FolderHelper getFolderHelper() {
+		if (folderHelper == null) {
+			folderHelper = new FolderHelper(this);
+		}
+		return folderHelper;
+	}
+
+	public MenuHelper getMenuHelper() {
+		if (menuHelper == null) {
+			menuHelper = new MenuHelper(this);
+		}
+		return menuHelper;
 	}
 
 }

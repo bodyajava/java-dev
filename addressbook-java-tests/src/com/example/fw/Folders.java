@@ -1,4 +1,4 @@
-package com.example.tests;
+package com.example.fw;
 
 import java.util.List;
 import java.util.ArrayList;
