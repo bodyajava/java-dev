@@ -27,7 +27,7 @@ public class FolderHelper {
 		for (Object folder : folders) {
 			list.add(folder.toString());
 		}
-		return new Folders (list);
+		return new Folders(list);
 	}
 
 	public String createFolder(String folderName) {
@@ -58,6 +58,14 @@ public class FolderHelper {
 			currentTime = System.currentTimeMillis();			
 		}
 		return null;
+	}
+
+	public void removeFolder(String folder2) {
+		JTreeOperator tree = new JTreeOperator(manager.getApplication());
+		tree.selectRow(1);
+		manager.getMenuHelper().pushRemoveFolder();
+		JDialogOperator dialog = new JDialogOperator(manager.getApplication());
+		new JButtonOperator(dialog, "Yes").push();
 	}
 
 }

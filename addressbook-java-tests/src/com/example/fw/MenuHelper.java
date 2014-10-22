@@ -20,4 +20,9 @@ public class MenuHelper {
 		menu.pushMenuNoBlock("File|Exit");
 	}
 
+	public void pushRemoveFolder() {
+		JMenuBarOperator menu = new JMenuBarOperator(manager.getApplication());
+		menu.pushMenuNoBlock("File|Delete");	
+	}
+
 }
