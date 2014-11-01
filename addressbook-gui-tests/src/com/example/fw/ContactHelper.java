@@ -14,11 +14,12 @@ public class ContactHelper extends HelperBase {
 
 	public Contact getFirstContact() {
 		initGetContactData();
-		cancelUpdateForm();
 		
 		Contact contact = new Contact()
 			.setFirstname(manager.getAutoItHelper().getText("TDBEdit12"))
 			.setLastname(manager.getAutoItHelper().getText("TDBEdit11"));
+		
+		cancelUpdateForm();
 		return contact;
 	}
 
@@ -59,6 +60,20 @@ public class ContactHelper extends HelperBase {
 		manager.getAutoItHelper()
 			.click("TRbButton1")
 			.winWaitAndActivate("AddressBook Portable", "", 3000);
+	}
+
+	public void selectFirstContact() {
+		manager.getAutoItHelper()
+			.winWaitAndActivate("AddressBook Portable", "", 3000)
+			.click("TListView1")
+			.send("{DOWN}{SPACE}");
+	}
+
+	public void removeContact() {
+		manager.getAutoItHelper()
+			.click("TRbButton2")
+			.winWaitAndActivate("Confirm", "", 3000)
+			.click("Yes");
 	}
 
 
