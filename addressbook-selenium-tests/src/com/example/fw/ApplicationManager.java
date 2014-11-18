@@ -8,30 +8,17 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
 public class ApplicationManager {
-	public WebDriver driver;
+	private WebDriver driver;
 	private NavigationHelper navigationHelper;
 	private GroupHelper groupHelper;
 	private ContactHelper contactHelper;
 	private PrintPhonesHelper printPhonesHelper;
-	public String baseUrl;
+	private HibernateHelper hibernateHelper;
 	private Properties properties;
+	public String baseUrl;
 	
 	public ApplicationManager (Properties properties) {
 	    this.properties = properties;
-	    String browser = properties.getProperty("browser");
-	    if (browser.equals("firefox")) {
-	    	driver = new FirefoxDriver();	    	
-	    } else if (browser.equals("ie")) {
-	    	driver = new InternetExplorerDriver();	    	
-	    } else if (browser.equals("chrome")) {
-	    	driver = new ChromeDriver();	    	
-	    } else {
-	    	throw new Error("Unsupported browser: '" + browser + "'.");
-	    }
-	    
-	    baseUrl = properties.getProperty("baseUrl");
-	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-	    driver.get(baseUrl);
 	}
 
 	public void stop() {
@@ -66,4 +53,32 @@ public class ApplicationManager {
 		return printPhonesHelper;
 	}
 
+	public HibernateHelper getHibernateHelper() {
+		if (hibernateHelper == null) {
+			hibernateHelper = new HibernateHelper(this);
+		};
+		return hibernateHelper;
+	}
+
+	public WebDriver getDriver() {
+		String browser = properties.getProperty("browser");
+		if (driver == null) {
+		    if (browser.equals("firefox")) {
+		    	driver = new FirefoxDriver();	    	
+		    } else if (browser.equals("ie")) {
+		    	driver = new InternetExplorerDriver();	    	
+		    } else if (browser.equals("chrome")) {
+		    	driver = new ChromeDriver();	    	
+		    } else {
+		    	throw new Error("Unsupported browser: '" + browser + "'.");
+		    }
+		    
+		    baseUrl = properties.getProperty("baseUrl");
+		    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		    driver.get(baseUrl);
+		};
+		return driver;
+	}
+	
+	
 }

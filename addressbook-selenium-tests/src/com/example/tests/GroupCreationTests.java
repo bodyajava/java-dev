@@ -22,11 +22,13 @@ public class GroupCreationTests extends TestBase {
 	@Test(dataProvider = "loadGroupsFromFile")
 	public void testAddGroupWithValidData(GroupData group) throws Exception { 
 		
-		SortedListOf<GroupData> oldList = app.getGroupHelper().getGroupsList();
+		// SortedListOf<GroupData> oldList = app.getGroupHelper().getGroupsList();
+		SortedListOf<GroupData> oldList = new SortedListOf<GroupData>(app.getHibernateHelper().listGroups());
 		
 		app.getGroupHelper().createGroup(group);
 		
-		SortedListOf<GroupData> newList = app.getGroupHelper().getGroupsList(); 
+		SortedListOf<GroupData> newList = app.getGroupHelper().getGroupsList();
+		//SortedListOf<GroupData> newList = new SortedListOf<GroupData>(app.getHibernateHelper().listGroups());
 		
 		assertThat(newList, equalTo(oldList.withAdded(group)));
 	}

@@ -3,14 +3,14 @@ package com.example.fw;
 import org.openqa.selenium.By;
 import com.example.fw.ApplicationManager;
 
-public class NavigationHelper extends HelperBase{
+public class NavigationHelper extends WebDriverHelperBase{
 
 	public NavigationHelper(ApplicationManager manager) {
 		super(manager);
 	}
 
 	public void storefront() {
-		manager.driver.get(manager.baseUrl);
+		manager.getDriver().get(manager.baseUrl);
 	}
 
 	public void mainPage() {

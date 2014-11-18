@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import com.example.utils.SortedListOf;
 
-public class PrintPhonesHelper extends HelperBase {
+public class PrintPhonesHelper extends WebDriverHelperBase {
 	
 	public PrintPhonesHelper(ApplicationManager manager) {
 		super(manager);
