@@ -7,10 +7,11 @@ import com.example.utils.SortedListOf;
 
 public class ContactUpdateTests extends TestBase {
 
-	@Test(dataProvider = "randomValidContactGenerator")
+	@Test(dataProvider = "randomValidContactGenerator", dataProviderClass = TestBase.class)
 	public void updateCertainContact(ContactData contact) throws Exception {
 	    
-	    SortedListOf<ContactData> oldList = app.getContactHelper().getContactsList();
+	    //SortedListOf<ContactData> oldList = app.getContactHelper().getContactsList();
+		SortedListOf<ContactData> oldList = new SortedListOf<ContactData>(app.getHibernateHelper().listContacts());
 
 		int index = app.getContactHelper().generateIndexBasedOnListSize(oldList.size());
 		ContactData candidate = app.getContactHelper().updateContact(contact, index);

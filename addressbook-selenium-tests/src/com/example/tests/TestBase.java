@@ -1,13 +1,20 @@
 package com.example.tests;
 
+import static com.example.tests.ContactDataGenerator.loadContactsFromXmlFile;
+import static com.example.tests.GroupDataGenerator.loadGroupsFromXmlFile;
+
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
+
 import com.example.fw.ApplicationManager;
 
 public class TestBase {
@@ -17,6 +24,16 @@ public class TestBase {
 	    ALPHA, ALPHANUMERIC, NUMERIC, PHONE, EMAIL 
 	}
 
+	@DataProvider
+	public static Iterator<Object[]> randomValidContactGenerator() throws IOException {
+		return wrapContactsIntoObjects(loadContactsFromXmlFile(new File("contacts.xml"))).iterator();
+	}
+	
+	@DataProvider
+	public static Iterator<Object[]> loadGroupsFromFile() throws IOException {
+		app.navigateTo().groupsPage();
+		return wrapGroupsIntoObjects(loadGroupsFromXmlFile(new File("groups.xml"))).iterator();
+	}
 	
 	@BeforeTest
 	public void setUp() throws Exception {

@@ -10,7 +10,9 @@ public class PrintPhones extends TestBase {
 	@Test
 	public void testPrintPhones() throws Exception {
 
-		SortedListOf<String> contactsList = app.getContactHelper().getContactsWithPhonesList();
+		//SortedListOf<String> contactsList = app.getContactHelper().getContactsWithPhonesList();
+		SortedListOf<String> contactsList = app.getPrintPhonesHelper()
+				.getProcessedList(new SortedListOf<ContactData>(app.getHibernateHelper().listContacts()));
 		
 		SortedListOf<String> printedList = app.getPrintPhonesHelper().getPrintedList();
 		

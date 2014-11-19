@@ -82,7 +82,7 @@ public class ContactDataGenerator {
 	
 	private static String[] generateRandomDate() {
 		Calendar calendar = Calendar.getInstance();
-	        calendar.set(Calendar.YEAR, randBetween(1900, 2010));
+	        calendar.set(Calendar.YEAR, randBetween(1935, 2010));
 	        calendar.set(Calendar.DAY_OF_YEAR, randBetween(1, 365));
 	        String randomDate = calendar.getTime().toString();
 	        String[] part = randomDate.split(" ");

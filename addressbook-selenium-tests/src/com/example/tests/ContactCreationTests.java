@@ -13,15 +13,11 @@ import java.io.IOException;
 
 public class ContactCreationTests extends TestBase {
 	
-	@DataProvider
-	public static Iterator<Object[]> randomValidContactGenerator() throws IOException {
-		return wrapContactsIntoObjects(loadContactsFromXmlFile(new File("contacts.xml"))).iterator();
-	}
-	
-	@Test(dataProvider = "randomValidContactGenerator")
+	@Test(dataProvider = "randomValidContactGenerator", dataProviderClass = TestBase.class)
 	public void testAddNonEmptyContact(ContactData contact) throws Exception {
 
-		SortedListOf<ContactData> oldList = app.getContactHelper().getContactsList();
+		//SortedListOf<ContactData> oldList = app.getContactHelper().getContactsList();
+		SortedListOf<ContactData> oldList = new SortedListOf<ContactData>(app.getHibernateHelper().listContacts());
 		
 		app.getContactHelper().createContact(contact);
 		

@@ -11,7 +11,8 @@ public class GroupRemoveTests extends TestBase {
 	public void deleteCertainGroup() {
 		
 		app.navigateTo().groupsPage();
-		SortedListOf<GroupData> oldList = app.getGroupHelper().getGroupsList();
+		//SortedListOf<GroupData> oldList = app.getGroupHelper().getGroupsList();
+		SortedListOf<GroupData> oldList = new SortedListOf<GroupData>(app.getHibernateHelper().listGroups());
 		
 		int index = app.getGroupHelper().generateIndexBasedOnListSize(oldList.size());
 		app.getGroupHelper().deleteGroup(index);

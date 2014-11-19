@@ -10,7 +10,8 @@ public class ContactRemoveTests extends TestBase {
 	@Test
 	public void deleteCertainContact() throws Exception {
 		
-		SortedListOf<ContactData> oldList = app.getContactHelper().getContactsList();
+		//SortedListOf<ContactData> oldList = app.getContactHelper().getContactsList();
+		SortedListOf<ContactData> oldList = new SortedListOf<ContactData>(app.getHibernateHelper().listContacts());
 
 		int index = app.getContactHelper().generateIndexBasedOnListSize(oldList.size());
 		ContactData candidate = app.getContactHelper().deleteContact(index);

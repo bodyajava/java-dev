@@ -12,14 +12,8 @@ import org.testng.annotations.Test;
 import com.example.utils.SortedListOf;
 
 public class GroupCreationTests extends TestBase {
-	
-	@DataProvider
-	public static Iterator<Object[]> loadGroupsFromFile() throws IOException {
-		app.navigateTo().groupsPage();
-		return wrapGroupsIntoObjects(loadGroupsFromXmlFile(new File("groups.xml"))).iterator();
-	  }
 
-	@Test(dataProvider = "loadGroupsFromFile")
+	@Test(dataProvider = "loadGroupsFromFile", dataProviderClass = TestBase.class)
 	public void testAddGroupWithValidData(GroupData group) throws Exception { 
 		
 		// SortedListOf<GroupData> oldList = app.getGroupHelper().getGroupsList();
