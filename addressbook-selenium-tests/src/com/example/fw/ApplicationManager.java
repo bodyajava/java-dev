@@ -14,15 +14,23 @@ public class ApplicationManager {
 	private ContactHelper contactHelper;
 	private PrintPhonesHelper printPhonesHelper;
 	private HibernateHelper hibernateHelper;
-	private Properties properties;
+	public Properties properties;
+	private ApplicationModel model;
 	public String baseUrl;
 	
 	public ApplicationManager (Properties properties) {
 	    this.properties = properties;
+	    model = new ApplicationModel();
+	    model.setGroups(getHibernateHelper().listGroups());
+	    model.setContacts(getHibernateHelper().listContacts());
 	}
 
 	public void stop() {
 		driver.quit();
+	}
+	
+	public ApplicationModel getModel() {
+		return model;
 	}
 
 	public NavigationHelper navigateTo(){
@@ -80,5 +88,8 @@ public class ApplicationManager {
 		return driver;
 	}
 	
+	public String getProperty(String key) {
+		return properties.getProperty(key);
+	}
 	
 }

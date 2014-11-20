@@ -10,16 +10,19 @@ public class GroupRemoveTests extends TestBase {
 	@Test
 	public void deleteCertainGroup() {
 		
-		app.navigateTo().groupsPage();
-		//SortedListOf<GroupData> oldList = app.getGroupHelper().getGroupsList();
-		SortedListOf<GroupData> oldList = new SortedListOf<GroupData>(app.getHibernateHelper().listGroups());
+		SortedListOf<GroupData> oldList = app.getModel().getGroups();
 		
+		app.navigateTo().groupsPage();
 		int index = app.getGroupHelper().generateIndexBasedOnListSize(oldList.size());
 		app.getGroupHelper().deleteGroup(index);
 		
-		SortedListOf<GroupData> newList = app.getGroupHelper().getGroupsList();
+		SortedListOf<GroupData> newList = app.getModel().getGroups();
 		
-		assertThat(newList, equalTo(oldList.without(index)));
+		assertThat(newList, equalTo(oldList));
+		assertThat(newList, equalTo(app.getHibernateHelper().listGroups()));
+		System.out.println("Compared with DB");
+		assertThat(newList, equalTo(app.getGroupHelper().getUIGroups()));
+		System.out.println("Compared with UI");
 	}
 
 }

@@ -4,6 +4,7 @@
   <test verbose="2" name="Default test">
     <classes>
       <class name="com.example.tests.GroupDeleteAllGroups"/>
+      <class name="com.example.tests.ContactDeleteAllContacts"/>
     </classes>
   </test> <!-- Default test -->
 </suite> <!-- Default suite -->

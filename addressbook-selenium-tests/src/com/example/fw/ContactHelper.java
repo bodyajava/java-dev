@@ -4,7 +4,6 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-
 import com.example.tests.ContactData;
 import com.example.utils.SortedListOf;
 
@@ -14,29 +13,21 @@ public class ContactHelper extends WebDriverHelperBase{
 		super(manager);
 	}
 
-	private SortedListOf<ContactData> cachedContacts;
 	private ContactData candidate;
 	
-	public SortedListOf<ContactData> getContactsList() {
-		if (cachedContacts == null) {
-			rebuildCache();
-		}
-		return cachedContacts;
-	}
-
-	private void rebuildCache() {
-		cachedContacts = new SortedListOf<ContactData>();
+	public SortedListOf<ContactData> getUIContacts() {
+		SortedListOf<ContactData> contacts = new SortedListOf<ContactData>();
+		
 		List<WebElement> rows = driver.findElements(By.xpath(".//tr"));
 		int index = rows.size();
 		if (index > 2) {
 			for (int i = 1; i < index - 1; i++) {
 				String firstname = rows.get(i).findElement(By.xpath(".//td[3]")).getText();
 				String lastname = rows.get(i).findElement(By.xpath(".//td[2]")).getText();
-				cachedContacts.add(new ContactData()
-					.withFirstname(firstname)
-					.withLastname(lastname));
+				contacts.add(new ContactData().withFirstname(firstname).withLastname(lastname));
 			}
 		}
+		return contacts;
 	}
 
 	public void createContact(ContactData contact) {
@@ -44,7 +35,7 @@ public class ContactHelper extends WebDriverHelperBase{
 		fillContactForm(contact);
 		submitNewContactForm();
 		returnToHomePage();	
-		rebuildCache();
+		manager.getModel().addContact(contact);
 	}
 
 	public ContactData updateContact(ContactData contact, int index) {
@@ -53,7 +44,7 @@ public class ContactHelper extends WebDriverHelperBase{
 		fillContactForm(contact);
 		clickUpdateButton();
 		returnToHomePage();
-		rebuildCache();
+		manager.getModel().removeContact(index).addContact(contact);
 		return candidate;
 	}
 
@@ -62,7 +53,7 @@ public class ContactHelper extends WebDriverHelperBase{
 		getCandidate();		
 		clickDeleteButton();
 		returnToHomePage();
-		rebuildCache();
+		manager.getModel().removeContact(index);
 		return candidate;
 	}
 
@@ -107,7 +98,6 @@ public class ContactHelper extends WebDriverHelperBase{
 
 	public ContactHelper submitNewContactForm() {
 		click(By.name("submit"));
-		cachedContacts = null;
 		return this;
 	}
 
@@ -123,12 +113,10 @@ public class ContactHelper extends WebDriverHelperBase{
 
 	public void clickDeleteButton() {
 		click(By.xpath("//form[2]/input[2]"));
-		cachedContacts = null;
 	}
 
 	public void clickUpdateButton() {
 		click(By.xpath("//form[1]/input[11]"));
-		cachedContacts = null;
 	}
 
 	public void returnToHomePage() {
@@ -149,8 +137,7 @@ public class ContactHelper extends WebDriverHelperBase{
 		}
 	}
 
-	public int getIndexByName(SortedListOf<ContactData> oldList,
-			ContactData candidate) {
+	public int getIndexByName(SortedListOf<ContactData> oldList, ContactData candidate) {
 		for (int i = 0; i < oldList.size(); i++) {
 			ContactData contact = oldList.get(i);
 	        if (contact.getFirstname().equals(candidate.getFirstname())

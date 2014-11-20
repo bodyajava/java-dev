@@ -18,7 +18,10 @@ import org.testng.annotations.DataProvider;
 import com.example.fw.ApplicationManager;
 
 public class TestBase {
+	
 	static ApplicationManager app;
+	private int checkCounter;
+	private int checkFrequency;
 	
 	public static enum Mode {
 	    ALPHA, ALPHANUMERIC, NUMERIC, PHONE, EMAIL 
@@ -37,10 +40,12 @@ public class TestBase {
 	
 	@BeforeTest
 	public void setUp() throws Exception {
-		String configFile = System.getProperty("configFile", "firefox.ppp");
+		String configFile = System.getProperty("configFile", "application.ppp");
 		Properties properties = new Properties();
 		properties.load(new FileReader(new File(configFile)));
 		app = new ApplicationManager (properties); 
+		checkCounter = 0;
+		checkFrequency = Integer.parseInt(properties.getProperty("check.frequency"));
 	  }
 
 	
@@ -49,6 +54,15 @@ public class TestBase {
 		app.stop();
 	  }
 		
+	protected boolean checkMe() {
+		checkCounter++;		
+		if (checkCounter == checkFrequency) {
+			checkCounter = 0;
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 	public static List<Object[]> wrapGroupsIntoObjects(List<GroupData> groups) {
 		List<Object[]> list = new ArrayList<Object[]>();
